@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://bnvvoqhswk0ll"]
+[gd_scene load_steps=8 format=4 uid="uid://bnvvoqhswk0ll"]
 
+[ext_resource type="PackedScene" path="res://playerCharacter.tscn" id="1_8qqes"]
 [ext_resource type="Texture2D" uid="uid://c772di20dt1lg" path="res://forest_/forest_.png" id="1_g6q0d"]
 [ext_resource type="Texture2D" uid="uid://cvl6revj6pnx0" path="res://forest_/forest_ [resources].png" id="2_5bajq"]
 
@@ -280,3 +281,8 @@ tile_set = SubResource("TileSet_8qqes")
 [node name="Items" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAQABQAAAAHAAcAAAArABkAAAAHAAcAAAAmAAoAAAAHAAcAAAA=")
 tile_set = SubResource("TileSet_0tbcg")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_8qqes")]
+
+[node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
+zoom = Vector2(3, 3)
