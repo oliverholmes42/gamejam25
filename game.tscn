@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://elst0xn32iil"]
+[gd_scene load_steps=4 format=3 uid="uid://elst0xn32iil"]
 
 [ext_resource type="PackedScene" uid="uid://bnvvoqhswk0ll" path="res://over_world.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b4v2swjxwc4p2" path="res://playerCharacter.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://ci3yx6hvhb5ae" path="res://hit_doll.tscn" id="3_feb5d"]
 
 [node name="Game" type="Node2D"]
 
@@ -9,3 +10,7 @@
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_feb5d")]
 position = Vector2(320, 241)
+
+[node name="hitDoll" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(359.99997, 217.99998)
+rotation = -0.024812816

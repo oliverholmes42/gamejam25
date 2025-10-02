@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci3yx6hvhb5ae"]
+
+[ext_resource type="Script" uid="uid://cqecsagef2syy" path="res://hit_doll.gd" id="1_3o7n1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32qly"]
+size = Vector2(40, 39)
+
+[node name="hitDoll" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_3o7n1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.43333772, 0.2859102, 0.3159795, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(21, 19.5)
+shape = SubResource("RectangleShape2D_32qly")
