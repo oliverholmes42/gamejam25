@@ -1,28 +1,17 @@
-extends Area2D
+extends CharacterBody2D
 
-@export var speed = 400
-var screen_size
+@export var speed := 400
 
-func _ready():
-	screen_size = get_viewport_rect().size
-
-func _process(delta):
-	var velocity = Vector2.ZERO
+func _physics_process(delta):
+	var direction := Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
+		direction.x += 1
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
+		direction.x -= 1
 	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
+		direction.y += 1
 	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play()
-	else: 
-		$AnimatedSprite2D.stop()
-		
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-	
+		direction.y -= 1
+
+	velocity = direction.normalized() * speed
+	move_and_slide()
