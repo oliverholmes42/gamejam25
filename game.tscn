@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bnvvoqhswk0ll" path="res://over_world.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b4v2swjxwc4p2" path="res://playerCharacter.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="3_enemy"]
-[ext_resource type="PackedScene" uid="uid://ci3yx6hvhb5ae" path="res://hit_doll.tscn" id="4_doll"]
 
 [node name="Game" type="Node2D"]
 
@@ -14,11 +13,7 @@ position = Vector2(-3, 3)
 position = Vector2(320, 241)
 
 [node name="Enemy" parent="." instance=ExtResource("3_enemy")]
-position = Vector2(383, 174)
+position = Vector2(428, 195)
 
 [node name="Enemy2" parent="." instance=ExtResource("3_enemy")]
-position = Vector2(156, 477)
-
-[node name="hitDoll" parent="." instance=ExtResource("4_doll")]
-position = Vector2(359.99997, 217.99998)
-rotation = -0.024812816
+position = Vector2(239, 265)

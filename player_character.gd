@@ -26,11 +26,13 @@ func _physics_process(delta):
 		
 		# Flip sprite depending on direction
 		if direction.x > 0:
-			#$AnimatedSprite2D.flip_h = false
-			scale.x = 1
+			$AnimatedSprite2D.flip_h = false
+			$swordSwing.scale.x = 1
+			$CollisionShape2D.scale.x = 1
 		elif direction.x < 0:
-			#$AnimatedSprite2D.flip_h = true
-			scale.x = -1
+			$AnimatedSprite2D.flip_h = true
+			$swordSwing.scale.x = -1
+			$CollisionShape2D.scale.x = -1
 	else:
 		velocity = Vector2.ZERO
 
@@ -40,7 +42,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attacking = true
 		$AnimatedSprite2D.play("attack")
-		$dangerZone.attack()
+	
 
 
 
@@ -52,3 +54,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			$AnimatedSprite2D.play("run")
 		else:
 			$AnimatedSprite2D.play("idle")
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	var anim = $AnimatedSprite2D.animation
+	var frame = $AnimatedSprite2D.frame
+	
+	if anim == "attack" and frame == 3:
+		$swordSwing._on_attack()

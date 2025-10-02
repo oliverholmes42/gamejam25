@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://tkvf1xphx7nk"]
+
+[ext_resource type="Texture2D" uid="uid://v5ia1mtfxabn" path="res://assets/10 Undead JRPG characters 1.0/Original Size 1х/Pallete 1/Zombie.png" id="1_ggx83"]
+
+[sub_resource type="GDScript" id="GDScript_ggx83"]
+script/source = "extends Area2D
+
+@export var speed: float = 80.0           # pixels/second
+@export var stop_distance: float = 0.0    # 0 = never stop; >0 = stop near player
+
+var player: Node2D
+
+func _ready() -> void:
+	player = get_tree().get_first_node_in_group(\"player\") as Node2D
+	if player == null:
+		push_error(\"[Enemy] No node in group 'player' found. Put your player in the 'player' group or assign via NodePath.\")
+
+func _process(delta: float) -> void:
+	if player == null or not is_instance_valid(player):
+		return
+
+	var to_player: Vector2 = player.global_position - global_position
+	var dist: float = to_player.length()
+
+	if stop_distance > 0.0 and dist <= stop_distance:
+		return  # do nothing, enemy stays put
+	else:
+		var dir: Vector2 = (to_player / dist) if dist > 0.0001 else Vector2.ZERO
+		global_position += dir * speed * delta
+
+		# Optional: rotate towards movement direction
+		if dir.length() > 0.01:
+			rotation = dir.angle()
+
+func take_damage():
+	print(\"ouchi\")
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tb43a"]
+radius = 21.0
+height = 56.0
+
+[node name="Fiend" type="Area2D" groups=["enemy"]]
+script = SubResource("GDScript_ggx83")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ggx83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
+shape = SubResource("CapsuleShape2D_tb43a")
