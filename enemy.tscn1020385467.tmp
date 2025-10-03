@@ -13,6 +13,8 @@ radius = 21.023796
 collision_layer = 3
 script = ExtResource("1_4gyqm")
 speed = 50.0
+stop_distance = null
+health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -29,8 +31,4 @@ texture = ExtResource("1_7k104")
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_qi2p4")
 
-[node name="DamageTick" type="Timer" parent="."]
-
 [connection signal="area_entered" from="DamageZone" to="." method="_on_damage_zone_area_entered"]
-[connection signal="area_exited" from="DamageZone" to="." method="_on_damage_zone_area_exited"]
-[connection signal="timeout" from="DamageTick" to="." method="_on_damage_tick_timeout"]

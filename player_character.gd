@@ -2,8 +2,20 @@ extends CharacterBody2D
 
 @export var speed := 75
 var attacking := false
+var dead := false   # <--- NEW
+
+@export var max_health := 50
+var health := max_health
+
+signal health_changed
+signal died
 
 func _physics_process(delta):
+	if dead:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	# Movement only works if not attacking
 	if not attacking:
 		var direction := Vector2.ZERO
@@ -42,23 +54,53 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attacking = true
 		$AnimatedSprite2D.play("attack")
-	
-
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
+	if $AnimatedSprite2D.animation == "death":
+		# After death animation, reset state
+		attacking = false
+		$AnimatedSprite2D.play("idle")
+		return
+
 	if $AnimatedSprite2D.animation == "attack":
 		attacking = false
-		# After attack ends, go back to idle (or run if moving)
 		if velocity != Vector2.ZERO:
 			$AnimatedSprite2D.play("run")
 		else:
 			$AnimatedSprite2D.play("idle")
 
 
+
 func _on_animated_sprite_2d_frame_changed() -> void:
+
 	var anim = $AnimatedSprite2D.animation
 	var frame = $AnimatedSprite2D.frame
 	
 	if anim == "attack" and frame == 3:
 		$swordSwing._on_attack()
+	
+	if anim == "death" and frame == 11:
+		emit_signal("died")
+
+
+func apply_damage(amount):
+	if dead:
+		return
+	health -= amount
+	var percent = float(health) / float(max_health)
+	emit_signal("health_changed", percent * 100)
+	if health <= 0:
+		health = 0
+		die()
+
+
+func die():
+	$AnimatedSprite2D.play("death")
+	velocity = Vector2.ZERO
+	attacking = true
+
+func heal():
+	health = max_health
+	apply_damage(0)
+	

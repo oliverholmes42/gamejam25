@@ -1,4 +1,6 @@
-extends Area2D
+extends Node2D
+
+signal leaveUnderworld
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,10 +12,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_attack():
-	var inRange = get_overlapping_areas()
-	print(inRange)
-	for area in inRange:
-		print(area)
-		if(area.is_in_group("enemy")):
-			area.take_damage(5)
+
+func _on_exit_area_entered(area: Area2D) -> void:
+	emit_signal("leaveUnderworld")

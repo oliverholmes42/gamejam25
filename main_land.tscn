@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk30poty3mpjy"]
+
+[ext_resource type="Script" uid="uid://jd60bhfd14ld" path="res://main_land.gd" id="1_cjiq8"]
+[ext_resource type="PackedScene" uid="uid://bkqsrm7k7d8o2" path="res://Maps2.tscn" id="1_prs7q"]
+[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="2_ms04c"]
+
+[node name="MainLand" type="Node2D"]
+script = ExtResource("1_cjiq8")
+enemy_scene = ExtResource("2_ms04c")
+
+[node name="OverWorld" parent="." instance=ExtResource("1_prs7q")]
+position = Vector2(-233, -46)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+position = Vector2(522, 222)
+
+[node name="Marker2D" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(304, -23)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(1492, 449)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(-773, 256)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(-332, -335)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(110, 119)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

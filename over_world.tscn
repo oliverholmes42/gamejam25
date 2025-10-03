@@ -768,7 +768,7 @@ terrain_set_0/terrain_0/name = "walls 0"
 terrain_set_0/terrain_0/color = Color(0.13729873, 0.4504199, 0.3171005, 1)
 sources/0 = SubResource("TileSetAtlasSource_6ynly")
 
-[node name="OverWorld" type="Node2D"]
+[node name="OverWorldMap" type="Node2D"]
 texture_filter = 1
 
 [node name="Water" type="TileMapLayer" parent="."]

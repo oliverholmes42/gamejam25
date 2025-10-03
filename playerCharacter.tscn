@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b4v2swjxwc4p2"]
+[gd_scene load_steps=52 format=3 uid="uid://b4v2swjxwc4p2"]
 
 [ext_resource type="Script" uid="uid://bn5tsjm8w361a" path="res://player_character.gd" id="1_hpry5"]
 [ext_resource type="Texture2D" uid="uid://c7aj2cwju2u1p" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_u4713"]
@@ -207,7 +207,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 15.0
+"speed": 45.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -292,7 +292,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kqxna")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -353,6 +353,10 @@ animations = [{
 radius = 2.0
 height = 14.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ti2yg"]
+radius = 8.0
+height = 26.0
+
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_hpry5")
 metadata/_edit_group_ = true
@@ -366,9 +370,7 @@ shape = SubResource("CapsuleShape2D_hpry5")
 texture_filter = 1
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_sud3t")
-animation = &"attack"
-frame = 5
-frame_progress = 1.0
+animation = &"death"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -385,6 +387,12 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_3i25x")
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_ti2yg")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
