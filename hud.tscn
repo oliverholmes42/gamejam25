@@ -1,6 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvewtmm6d837k"]
+[gd_scene load_steps=10 format=3 uid="uid://dvewtmm6d837k"]
 
 [ext_resource type="Script" uid="uid://cg8yakgevo7wv" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://bxe85ladptubx" path="res://assets/Coin_Gems/MonedaR.png" id="2_64ctp"]
+
+[sub_resource type="Theme" id="Theme_64ctp"]
+default_font_size = 32
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sq4i"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_640wx"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2258"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xsix"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rftc2"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37p78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sq4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_640wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2258")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xsix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rftc2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_37p78")
@@ -13,8 +60,17 @@ offset_bottom = 52.0
 value = 100.0
 
 [node name="Points" type="RichTextLabel" parent="."]
-offset_left = 933.0
-offset_top = 15.0
-offset_right = 1140.0
-offset_bottom = 83.0
+offset_left = 892.0
+offset_top = 17.0
+offset_right = 1099.0
+offset_bottom = 65.0
+theme = SubResource("Theme_64ctp")
+text = "0"
 horizontal_alignment = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1120, 39)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_37p78")
+autoplay = "default"
+frame_progress = 0.14217868

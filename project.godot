@@ -13,7 +13,9 @@ config_version=5
 config/name="New Game Project"
 run/main_scene="uid://elst0xn32iil"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/image="uid://b63e5bbt48pfg"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [display]
 
