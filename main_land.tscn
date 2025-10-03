@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk30poty3mpjy"]
+[gd_scene load_steps=5 format=3 uid="uid://bk30poty3mpjy"]
 
 [ext_resource type="Script" uid="uid://jd60bhfd14ld" path="res://main_land.gd" id="1_cjiq8"]
 [ext_resource type="PackedScene" uid="uid://bkqsrm7k7d8o2" path="res://Maps2.tscn" id="1_prs7q"]
 [ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="2_ms04c"]
+[ext_resource type="AudioStream" uid="uid://cu3uvc8m5juy6" path="res://music/walk-away-thrash-metal-instrumental-358603.mp3" id="4_7g3hu"]
 
 [node name="MainLand" type="Node2D"]
 script = ExtResource("1_cjiq8")
@@ -34,5 +35,9 @@ autostart = true
 
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(110, 119)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7g3hu")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

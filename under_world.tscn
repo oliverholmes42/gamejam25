@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cug3nq8fb36fg"]
+[gd_scene load_steps=7 format=3 uid="uid://cug3nq8fb36fg"]
 
 [ext_resource type="PackedScene" uid="uid://crufy0cvdrc4f" path="res://under_world_map.tscn" id="1_ifox8"]
 [ext_resource type="Script" uid="uid://ctl6kc4eokffl" path="res://under_world.gd" id="1_va457"]
 [ext_resource type="PackedScene" uid="uid://bc51vlho4haq5" path="res://grave.tscn" id="3_u0qr7"]
+[ext_resource type="AudioStream" uid="uid://dpq7ucmdmdif6" path="res://music/scary-ambience-1-157013.mp3" id="4_rp783"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u0qr7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rp783"]
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
 
 [node name="UnderWorld" type="Node2D"]
 script = ExtResource("1_va457")
@@ -16,6 +21,14 @@ script = ExtResource("1_va457")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2(-1, -122)
 shape = SubResource("CircleShape2D_u0qr7")
+
+[node name="Label" type="Label" parent="Exit"]
+offset_left = -76.0
+offset_top = -164.0
+offset_right = 77.0
+offset_bottom = -141.0
+label_settings = SubResource("LabelSettings_rp783")
+horizontal_alignment = 1
 
 [node name="Spawn" type="Marker2D" parent="."]
 
@@ -37,4 +50,10 @@ upgrade_type = "attack"
 upgrade_amount = 1
 cost = 100
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rp783")
+volume_db = 7.0
+autoplay = true
+
 [connection signal="area_entered" from="Exit" to="." method="_on_exit_area_entered"]
+[connection signal="area_exited" from="Exit" to="." method="_on_exit_area_exited"]

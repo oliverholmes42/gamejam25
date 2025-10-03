@@ -34,7 +34,7 @@ func spend_gold(amount: int) -> bool:
 func upgrade(thing, amount):
 	match thing:
 		"health":
-			health += amount
+			max_health += amount
 		"speed":
 			speed += amount
 		"attack":
@@ -85,6 +85,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attacking = true
 		$AnimatedSprite2D.play("attack")
+		$swordSwing/Sound.play()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

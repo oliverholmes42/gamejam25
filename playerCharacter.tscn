@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://b4v2swjxwc4p2"]
+[gd_scene load_steps=53 format=3 uid="uid://b4v2swjxwc4p2"]
 
 [ext_resource type="Script" uid="uid://bn5tsjm8w361a" path="res://player_character.gd" id="1_hpry5"]
 [ext_resource type="Texture2D" uid="uid://c7aj2cwju2u1p" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_u4713"]
 [ext_resource type="Script" uid="uid://bi0n0mobgmrqk" path="res://sword_swing.gd" id="3_ti2yg"]
+[ext_resource type="AudioStream" uid="uid://eil2gvyekaqu" path="res://soundEffects/sword-sound-260274-[AudioTrimmer.com] (2).mp3" id="4_3i25x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hpry5"]
 radius = 7.9999995
@@ -207,7 +208,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 45.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -359,6 +360,7 @@ height = 26.0
 
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_hpry5")
+speed = 50
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -370,7 +372,7 @@ shape = SubResource("CapsuleShape2D_hpry5")
 texture_filter = 1
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_sud3t")
-animation = &"death"
+animation = &"attack"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -385,6 +387,9 @@ script = ExtResource("3_ti2yg")
 position = Vector2(10, 6.5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_3i25x")
+
+[node name="Sound" type="AudioStreamPlayer" parent="swordSwing"]
+stream = ExtResource("4_3i25x")
 
 [node name="Node2D" type="Node2D" parent="."]
 
