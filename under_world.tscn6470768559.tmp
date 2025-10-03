@@ -24,11 +24,12 @@ shape = SubResource("CircleShape2D_u0qr7")
 [node name="Grave" parent="Graves" instance=ExtResource("3_u0qr7")]
 position = Vector2(136, -92)
 upgrade_type = "speed"
+upgrade_amount = 1
 
 [node name="Grave2" parent="Graves" instance=ExtResource("3_u0qr7")]
 position = Vector2(-216, -61)
 upgrade_type = "health"
-upgrade_amount = 5
+upgrade_amount = 1
 cost = 75
 
 [node name="Grave3" parent="Graves" instance=ExtResource("3_u0qr7")]

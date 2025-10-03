@@ -11,9 +11,9 @@ func _ready() -> void:
 	hud = $HUD
 	player.health_changed.connect(hud.applyHealth)
 	player.died.connect(handleDeath)
+	player.applyPoints.connect(hud.applyPoints)
 	
 	load_world("res://main_land.tscn")
-	givePoints(0)
 	
 	
 func load_world(path: String) -> void:
@@ -27,9 +27,6 @@ func load_world(path: String) -> void:
 		return
 	
 	var world_instance: Node2D = world_scene.instantiate()
-
-	if world_instance.has_signal("awardPoints"):
-		world_instance.awardPoints.connect(givePoints)
 		
 	if world_instance.has_signal("leaveUnderworld"):
 		world_instance.leaveUnderworld.connect(loadOverWorld)
@@ -41,13 +38,7 @@ func load_world(path: String) -> void:
 		player.global_position = spawn_marker.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-func givePoints(points):
-	Tpoints += points
-	hud.applyPoints(Tpoints)
-	
+
 func handleDeath():
 	print("u ded")
 	load_world("res://under_world.tscn")

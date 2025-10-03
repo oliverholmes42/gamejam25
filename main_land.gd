@@ -14,20 +14,18 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	# pick a random spawn point
 	var spawns = enemy_spawns.get_children()
 	if spawns.is_empty():
 		return
-
+		
 	var marker: Marker2D = spawns.pick_random()
-
-	# spawn an enemy
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = marker.global_position
-	enemy.givePoints.connect(givePoints)
-	# add it under the Enemies container
+
+	# connect the signal to the player
+	var player = get_tree().get_first_node_in_group("player")
+	enemy.givePoints.connect(player.add_points)
 	enemies.add_child(enemy)
-	print("spawned")
 	
 func givePoints(points):
 	print("points: ", points)

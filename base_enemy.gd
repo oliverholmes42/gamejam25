@@ -13,6 +13,6 @@ func take_damage(amount: int = 1) -> void:
 		
 
 func die() -> void:
-	print("%s died." % name)
-	emit_signal("givePoints", points)
+	print("%s died2." % name)
+	emit_signal("givePoints", 10)
 	queue_free()

@@ -7,8 +7,39 @@ var dead := false   # <--- NEW
 @export var max_health := 50
 var health := max_health
 
+@onready var swordSwing: Area2D = $swordSwing
+
 signal health_changed
 signal died
+
+var score: int = 0
+signal applyPoints
+
+func add_points(amount: int):
+	print("points2: ", amount)
+	score += amount
+	emit_signal("applyPoints", score)
+	
+func spend_gold(amount: int) -> bool:
+	print("score: ", score)
+	if amount > score:   # cost is higher than what you have
+		print("not enough gold")
+		return false
+	else:
+		print("Enough gold")
+		score -= amount
+		emit_signal("applyPoints", score)
+		return true
+		
+func upgrade(thing, amount):
+	match thing:
+		"health":
+			health += amount
+		"speed":
+			speed += amount
+		"attack":
+			swordSwing.attack+= amount
+	
 
 func _physics_process(delta):
 	if dead:

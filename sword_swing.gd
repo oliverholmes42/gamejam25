@@ -1,5 +1,5 @@
 extends Area2D
-
+var attack = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,4 +16,4 @@ func _on_attack():
 	for area in inRange:
 		print(area)
 		if(area.is_in_group("enemy")):
-			area.take_damage(5)
+			area.take_damage(attack)
