@@ -2,8 +2,38 @@ extends Node2D
 
 var player
 var hud
-var Tpoints = 0
+#var Tpoints = 0
 @onready var active_world: Node2D = $ActiveWorld
+
+signal toTitle
+
+@export var pauseScreen: PackedScene
+var pause_instance: CanvasLayer = null
+var pause_open := false  # track whether the menu is open
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("esc"):
+		if not pause_open:
+			_show_pause_menu()
+		else:
+			_hide_pause_menu()
+
+
+func _show_pause_menu():
+	pause_instance = pauseScreen.instantiate()
+	add_child(pause_instance)
+	pause_instance.goToTitleScreen.connect(gotoTitle)
+	pause_open = true
+
+func gotoTitle():
+	emit_signal("toTitle")
+
+func _hide_pause_menu():
+	if pause_instance:
+		pause_instance.queue_free()
+		pause_instance = null
+	pause_open = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,9 +70,22 @@ func load_world(path: String) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func handleDeath():
-	print("u ded")
 	load_world("res://under_world.tscn")
 
 func loadOverWorld():
 	load_world("res://main_land.tscn")
 	player.heal()
+	save_player_data()
+	
+func apply_player_data(data: Dictionary):
+	if data.is_empty():
+		return
+	player.max_health = data.get("max_health", player.max_health)
+	player.speed = data.get("speed", player.speed)
+	var score = data.get("score", player.score)
+	player.add_points(score)
+	if "attack" in data:
+		player.swordSwing.attack = data["attack"]
+
+func save_player_data():
+	SaveManager.save_player_data(player)

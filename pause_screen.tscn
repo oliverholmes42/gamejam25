@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfohgtehbl75t"]
+
+[ext_resource type="Script" uid="uid://buix5ty8n2svd" path="res://pause_screen.gd" id="1_gkx8r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nei6f"]
+font_size = 25
+
+[node name="PauseScreen" type="CanvasLayer"]
+script = ExtResource("1_gkx8r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 645.0
+color = Color(0.19607843, 0.19607843, 0.19607843, 0.22745098)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 133.0
+offset_right = 1145.0
+offset_bottom = 168.0
+text = "Menu"
+label_settings = SubResource("LabelSettings_nei6f")
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="."]
+offset_left = 537.0
+offset_top = 213.0
+offset_right = 616.0
+offset_bottom = 244.0
+text = "Continue
+"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 503.0
+offset_top = 255.0
+offset_right = 657.0
+offset_bottom = 286.0
+text = "Exit To Title Screen
+"
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

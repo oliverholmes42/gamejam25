@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://btg117njqy6w6"]
+
+[ext_resource type="Script" uid="uid://pjynhihyhwqb" path="res://title_screen.gd" id="1_v6p8y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1s85s"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_v6p8y"]
+font_size = 30
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_v6p8y")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 1152.0
+offset_bottom = 137.0
+text = "Dude who runs and kills beasties"
+label_settings = SubResource("LabelSettings_1s85s")
+horizontal_alignment = 1
+
+[node name="SubTitle" type="Label" parent="."]
+layout_mode = 0
+offset_top = 144.0
+offset_right = 1152.0
+offset_bottom = 186.0
+text = "The Game"
+label_settings = SubResource("LabelSettings_v6p8y")
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 218.0
+offset_right = 615.0
+offset_bottom = 249.0
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 256.0
+offset_right = 622.0
+offset_bottom = 287.0
+text = "New Game
+"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 295.0
+offset_right = 622.0
+offset_bottom = 326.0
+text = "Quit Game"
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

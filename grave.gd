@@ -21,7 +21,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_in_range = true
 		label.visible = true
-		label.text = "Press (c) to upgrade %s\nCost: %d gold" % [upgrade_type, cost]
+		label.text = "Interact to upgrade %s\nCost: %d gold" % [upgrade_type, cost]
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):

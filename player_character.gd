@@ -21,12 +21,9 @@ func add_points(amount: int):
 	emit_signal("applyPoints", score)
 	
 func spend_gold(amount: int) -> bool:
-	print("score: ", score)
 	if amount > score:   # cost is higher than what you have
-		print("not enough gold")
 		return false
 	else:
-		print("Enough gold")
 		score -= amount
 		emit_signal("applyPoints", score)
 		return true
