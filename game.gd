@@ -71,6 +71,7 @@ func load_world(path: String) -> void:
 
 func handleDeath():
 	load_world("res://under_world.tscn")
+	save_player_data()
 
 func loadOverWorld():
 	load_world("res://main_land.tscn")
