@@ -39,6 +39,7 @@ func spawnBoss():
 	var boss = BossScene.instantiate()
 	add_child(boss)
 	boss.global_position = BossSpawner.global_position
+	boss.die.connect = endGame()
 	
 func addKill():
 	killcount += 1
@@ -51,4 +52,10 @@ func addKill():
 		emit_signal("triggerLore", "25-kills")
 	elif killcount == 10:
 		emit_signal("triggerLore", "10-kills")
+		
+		
+func endGame():
+	timer.stop()
+	enemies.queue_free()
+	emit_signal("triggerLore", "endGame")
 	

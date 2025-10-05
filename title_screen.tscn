@@ -78,6 +78,19 @@ texture = ExtResource("3_ig5kc")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Credits" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 555.0
+offset_right = 749.0
+offset_bottom = 633.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/line_separation = 1
+text = "Credits:
+Developed by F2I STUDIOS
+V. Lleshi, A. Sadiku, D. Lantz & O. H. Holmes"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

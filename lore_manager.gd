@@ -23,8 +23,13 @@ var texts = {
 	"50-kills": {
 		"text": "The ground trembles… the dreamer opens its eye.\nThe feast begins.",
 		"duration": 8
+	},
+	"endGame": {
+		"text": "Silence. The island breathes its last, and the red fades to gray.\nYou have ended the cycle—or merely turned it anew?\nEven in victory, little ember, something still watches from above.\nThe End",
+		"duration": 10
 	}
 }
+
 
 
 
@@ -40,7 +45,8 @@ func _ready() -> void:
 	
 	display.add_theme_stylebox_override("normal", stylebox)
 	
-	render("first death")
+	render("endGame")
+	
 
 
 
