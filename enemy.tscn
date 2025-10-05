@@ -1,10 +1,65 @@
-[gd_scene load_steps=5 format=3 uid="uid://2oqfqxx5b61g"]
+[gd_scene load_steps=10 format=3 uid="uid://cravqnpdfawvx"]
 
 [ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://butjt0ssud4t5" path="res://assets/10 Undead JRPG characters 1.0/RPG Maker x3 size/Pallete 3/Ghoul.png" id="1_7k104"]
+[ext_resource type="AudioStream" uid="uid://cj1r6oho202ei" path="res://soundEffects/fiendeSkada-[AudioTrimmer.com]-[AudioTrimmer.com].mp3" id="3_qi2p4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
 radius = 11.0
+
+[sub_resource type="Animation" id="Animation_4gyqm"]
+resource_name = "Flash"
+length = 0.4
+
+[sub_resource type="Animation" id="Animation_qi2p4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iifgy"]
+resource_name = "hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.7217629, 0.012791276, 0.012791276, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iifgy"]
+_data = {
+&"Flash": SubResource("Animation_4gyqm"),
+&"RESET": SubResource("Animation_qi2p4"),
+&"hit": SubResource("Animation_iifgy")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qi2p4"]
 radius = 21.023796
@@ -23,13 +78,23 @@ position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(0.14843751, 0.14062506)
 texture = ExtResource("1_7k104")
 
+[node name="FlashAni" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_iifgy")
+}
+
 [node name="DamageZone" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_qi2p4")
 
 [node name="DamageTick" type="Timer" parent="."]
+
+[node name="HitSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qi2p4")
+volume_db = 17.558
 
 [connection signal="area_entered" from="DamageZone" to="." method="_on_damage_zone_area_entered"]
 [connection signal="area_exited" from="DamageZone" to="." method="_on_damage_zone_area_exited"]
