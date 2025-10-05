@@ -41,14 +41,14 @@ func spawnBoss():
 	boss.global_position = BossSpawner.global_position
 	
 func addKill():
-	killcount +=1
-	if killcount >= 50:
+	killcount += 1
+	if killcount == 50:
 		spawnBoss()
 		emit_signal("triggerLore", "50-kills")
-	elif killcount >= 40:
+	elif killcount == 40:
 		emit_signal("triggerLore", "40-kills")
-	elif killcount >= 25:
+	elif killcount == 25:
 		emit_signal("triggerLore", "25-kills")
-	elif killcount >= 10:
+	elif killcount == 10:
 		emit_signal("triggerLore", "10-kills")
 	
