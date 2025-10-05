@@ -42,19 +42,19 @@ func _on_title_screen_quit() -> void:
 
 
 func _start_game(load_saved_data: bool) -> void:
-	# Remove title screen
+	
 	if title_screen:
 		title_screen.queue_free()
 		title_screen = null
 
-	# Instance and add game scene
+	
 	game_instance = game_scene.instantiate()
 	add_child(game_instance)
 
-	# Connect back to title
+
 	game_instance.toTitle.connect(_load_title_screen)
 
-	# Wait one frame so the scene tree is ready
+	
 	await get_tree().process_frame
 
 	if load_saved_data:

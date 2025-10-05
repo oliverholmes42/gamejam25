@@ -4,34 +4,33 @@ class_name EnemyBase
 @export var health: int = 10
 @export var points: int = 10
 
-# Knockback-parametrar (justera i Inspector)
+
 @export var knockback_pixels: float = 30.0
 @export var knockback_time: float = 0.12
 
 signal givePoints
 signal AddKill
 
-var is_dying: bool = false  # stoppa AI/interaction efter lethal
+var is_dying: bool = false  
 
 func take_damage(amount: int = 1) -> void:
-	# 1) Minska HP
 	health -= amount
 
-	# 2) Ljud vid träff (kräver en AudioStreamPlayer2D "HitSfx" som barn)
+
 	if has_node("HitSfx"):
 		var sfx: AudioStreamPlayer2D = $HitSfx
-		# (valfritt) pitch-variation: sfx.pitch_scale = 0.95 + (randf() * 0.10)
+	
 		if sfx.playing:
 			sfx.stop()
 		sfx.play(0.0)
 
-	# 3) Röd flash (AnimationPlayer under Sprite2D, animation "hit")
+
 	var ap: AnimationPlayer = get_node_or_null("Sprite2D/FlashAni") as AnimationPlayer
 	if ap:
 		ap.stop()
 		ap.play("hit")
 
-	# 4) Knockback bort från spelaren
+	
 	var pl: Node2D = get_tree().get_first_node_in_group("player") as Node2D
 	if pl:
 		var v: Vector2 = global_position - pl.global_position
@@ -41,13 +40,13 @@ func take_damage(amount: int = 1) -> void:
 			tw.tween_property(self, "global_position", global_position + dir * knockback_pixels, knockback_time) \
 				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
-	# 5) Logg + död
+
 	print("%s took %d damage! Health now: %d" % [name, amount, health])
 	if health <= 0:
 		die()
 
 func die() -> void:
-	# Skydda mot dubbelkörning
+
 	if is_dying:
 		return
 	is_dying = true
@@ -56,7 +55,7 @@ func die() -> void:
 	emit_signal("givePoints", points)
 	emit_signal("AddKill")
 
-	# FRYS FIENDEN DIREKT (stoppa AI/rörelse & träffar)
+
 	set_process(false)
 	set_physics_process(false)
 
@@ -67,14 +66,14 @@ func die() -> void:
 	if dz:
 		dz.monitoring = false
 		dz.set_deferred("monitoring", false)
-	# Stäng av vår egen Area2D-övervakning också
+	
 	monitoring = false
 	set_deferred("monitoring", false)
 
-	# Spela död-ljud som one-shot och vänta innan queue_free
+
 	var death_len: float = _play_death_sfx_one_shot()
 
-	# Väntetid så visuella effekter hinner synas:
+
 	var flash_len: float = 0.18
 	var tween_len: float = knockback_time
 	var wait_time: float = max(flash_len, tween_len, death_len)
@@ -85,8 +84,6 @@ func die() -> void:
 	else:
 		queue_free()
 
-# Skapar en fristående AudioStreamPlayer2D i scenen, spelar upp död-ljudet
-# och frigör spelaren när ljudet är klart. Returnerar längden (sek) eller 0.0.
 func _play_death_sfx_one_shot() -> float:
 	var src: AudioStreamPlayer2D = get_node_or_null("DeathSfx") as AudioStreamPlayer2D
 	if src == null or src.stream == null:

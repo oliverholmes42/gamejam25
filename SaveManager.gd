@@ -2,7 +2,7 @@ extends Node
 
 const SAVE_PATH := "user://player_save.json"
 
-# Save relevant player stats
+
 func save_player_data(player):
 	var data = {
 		"max_health": player.max_health,
@@ -16,7 +16,7 @@ func save_player_data(player):
 	file.close()
 	print("✅ Saved player data:", data)
 
-# Load saved data
+
 func load_player_data() -> Dictionary:
 	if not FileAccess.file_exists(SAVE_PATH):
 		print("⚠️ No save file found.")
@@ -31,11 +31,11 @@ func load_player_data() -> Dictionary:
 		push_warning("❌ Failed to parse save data.")
 		return {}
 
-# Check if a save exists
+
 func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)
 
-# Delete save data for a brand new game
+
 func clear_save():
 	if FileAccess.file_exists(SAVE_PATH):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH))

@@ -35,7 +35,7 @@ var texts = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#display.hide()
+	display.hide()
 	
 	var stylebox = StyleBoxEmpty.new()
 	stylebox.content_margin_left = 20
@@ -44,8 +44,6 @@ func _ready() -> void:
 	stylebox.content_margin_bottom = 20
 	
 	display.add_theme_stylebox_override("normal", stylebox)
-	
-	render("endGame")
 	
 
 

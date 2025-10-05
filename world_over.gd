@@ -4,7 +4,7 @@ extends Node2D
 @onready var enemies: Node2D = $Enemies
 @onready var timer: Timer = $Timer
 
-@export var enemy_scene: PackedScene   # drag Enemy.tscn in the inspector
+@export var enemy_scene: PackedScene   
 
 signal awardPoints
 

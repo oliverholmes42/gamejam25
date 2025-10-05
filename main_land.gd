@@ -5,7 +5,7 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @onready var BossSpawner: Marker2D = $BossSpawner
 
-@export var enemy_scene: PackedScene   # drag Enemy.tscn in the inspector
+@export var enemy_scene: PackedScene
 @export var BossScene: PackedScene
 
 signal awardPoints
@@ -25,7 +25,7 @@ func _on_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = marker.global_position
 
-	# connect the signal to the player
+	
 	var player = get_tree().get_first_node_in_group("player")
 	enemy.givePoints.connect(player.add_points)
 	enemy.AddKill.connect(addKill)
@@ -39,7 +39,7 @@ func spawnBoss():
 	var boss = BossScene.instantiate()
 	add_child(boss)
 	boss.global_position = BossSpawner.global_position
-	boss.die.connect = endGame()
+	boss.AddKill.connect(endGame)
 	
 func addKill():
 	killcount += 1

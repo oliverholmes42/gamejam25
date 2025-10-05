@@ -2,7 +2,7 @@ extends Node2D
 
 var player
 var hud
-#var Tpoints = 0
+
 @onready var active_world: Node2D = $ActiveWorld
 @onready var loreManager: CanvasLayer = $LoreManager
 
@@ -10,7 +10,7 @@ signal toTitle
 
 @export var pauseScreen: PackedScene
 var pause_instance: CanvasLayer = null
-var pause_open := false  # track whether the menu is open
+var pause_open := false  
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
@@ -35,7 +35,7 @@ func _hide_pause_menu():
 		pause_instance = null
 	pause_open = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	player = $PlayerCharacter
 	hud = $HUD
@@ -47,10 +47,10 @@ func _ready() -> void:
 	
 	
 func load_world(path: String) -> void:
-	# Clear old world (if any)
+	
 	active_world.free_children()
 
-	# Load and instance the new world
+
 	var world_scene: PackedScene = load(path)
 	if world_scene == null:
 		push_error("Could not load world: %s" % path)
@@ -70,7 +70,7 @@ func load_world(path: String) -> void:
 	if spawn_marker:
 		player.global_position = spawn_marker.global_position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 
 func handleDeath():
 	load_world("res://under_world.tscn")

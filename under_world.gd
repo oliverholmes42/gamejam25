@@ -3,7 +3,7 @@ extends Node2D
 signal leaveUnderworld
 
 @onready var exit_area: Area2D = $Exit
-@onready var label: Label = $Exit/Label   # Add a Label as a child of ExitArea
+@onready var label: Label = $Exit/Label  
 
 var player_in_range: bool = false
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 	exit_area.body_entered.connect(_on_exit_area_entered)
 	exit_area.body_exited.connect(_on_exit_area_exited)
 	label.visible = false
-	label.add_theme_font_size_override("font_size", 12)  # small readable text
+	label.add_theme_font_size_override("font_size", 12)
 
 
 func _process(delta: float) -> void:

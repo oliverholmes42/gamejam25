@@ -44,7 +44,7 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	# Movement only works if not attacking
+
 	if not attacking:
 		var direction := Vector2.ZERO
 		if Input.is_action_pressed("move_right"):
@@ -58,13 +58,13 @@ func _physics_process(delta):
 
 		velocity = direction.normalized() * speed
 
-		# Animation logic
+	
 		if velocity != Vector2.ZERO:
 			$AnimatedSprite2D.play("run")
 		else:
 			$AnimatedSprite2D.play("idle")
 
-		# Flip sprite depending on direction
+		
 		if direction.x > 0:
 			$AnimatedSprite2D.flip_h = false
 			$swordSwing.scale.x = 1
@@ -78,7 +78,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	# Attack input
+
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attacking = true
 		$AnimatedSprite2D.play("attack")
@@ -86,7 +86,7 @@ func _physics_process(delta):
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "death":
-		# Lås upp igen efter dödsanim (om du vill fortsätta spela direkt)
+
 		dead = false
 		attacking = false
 		velocity = Vector2.ZERO
@@ -120,11 +120,11 @@ func apply_damage(amount: int) -> void:
 	if health < 0:
 		health = 0
 
-	# LJUD VID SKADA (om vi överlever träffen)
+
 	if health > 0:
 		var hit: AudioStreamPlayer2D = get_node_or_null("HitSfx") as AudioStreamPlayer2D
 		if hit and hit.stream:
-			# (valfritt) variation: hit.pitch_scale = 0.95 + (randf() * 0.10)
+			
 			hit.play(0.0)
 
 	var percent: float = float(health) / float(max_health) * 100.0
@@ -138,12 +138,12 @@ func die() -> void:
 	attacking = true
 	velocity = Vector2.ZERO
 
-	# LJUD VID DÖD
+	
 	var ds: AudioStreamPlayer2D = get_node_or_null("DeathSfx") as AudioStreamPlayer2D
 	if ds and ds.stream:
 		ds.play(0.0)
 
-	# stäng av kollision så vi inte tar fler träffar
+	
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.disabled = true
 
