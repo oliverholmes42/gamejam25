@@ -7,6 +7,8 @@ var dead := false
 @export var max_health := 50
 var health := max_health
 
+var deaths = 0
+
 @onready var swordSwing: Area2D = $swordSwing
 
 signal health_changed
@@ -146,6 +148,8 @@ func die() -> void:
 		$CollisionShape2D.disabled = true
 
 	$AnimatedSprite2D.play("death")
+	
+	deaths += 1
 
 func heal() -> void:
 	health = max_health

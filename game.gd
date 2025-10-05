@@ -4,13 +4,13 @@ var player
 var hud
 #var Tpoints = 0
 @onready var active_world: Node2D = $ActiveWorld
+@onready var loreManager: CanvasLayer = $LoreManager
 
 signal toTitle
 
 @export var pauseScreen: PackedScene
 var pause_instance: CanvasLayer = null
 var pause_open := false  # track whether the menu is open
-
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
@@ -60,6 +60,9 @@ func load_world(path: String) -> void:
 		
 	if world_instance.has_signal("leaveUnderworld"):
 		world_instance.leaveUnderworld.connect(loadOverWorld)
+		
+	if world_instance.has_signal("triggerLore"):
+		world_instance.triggerLore.connect(loreManager.render)
 
 	active_world.add_child(world_instance)
 	
@@ -72,6 +75,8 @@ func load_world(path: String) -> void:
 func handleDeath():
 	load_world("res://under_world.tscn")
 	save_player_data()
+	if(player.deaths == 1):
+		loreManager.render("first death")
 
 func loadOverWorld():
 	load_world("res://main_land.tscn")
@@ -83,6 +88,7 @@ func apply_player_data(data: Dictionary):
 		return
 	player.max_health = data.get("max_health", player.max_health)
 	player.speed = data.get("speed", player.speed)
+	player.deaths = data.get("deaths", player.deaths)
 	var score = data.get("score", player.score)
 	player.add_points(score)
 	if "attack" in data:

@@ -9,6 +9,7 @@ extends Node2D
 @export var BossScene: PackedScene
 
 signal awardPoints
+signal triggerLore
 var killcount = 0
 
 
@@ -43,3 +44,11 @@ func addKill():
 	killcount +=1
 	if killcount >= 50:
 		spawnBoss()
+		emit_signal("triggerLore", "50-kills")
+	elif killcount >= 40:
+		emit_signal("triggerLore", "40-kills")
+	elif killcount >= 25:
+		emit_signal("triggerLore", "25-kills")
+	elif killcount >= 10:
+		emit_signal("triggerLore", "10-kills")
+	

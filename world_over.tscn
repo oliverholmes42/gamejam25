@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bnvvoqhswk0ll" path="res://over_world.tscn" id="1_p0se1"]
 [ext_resource type="Script" uid="uid://jpbqa6deqepc" path="res://world_over.gd" id="1_uhihm"]
-[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="2_pyjmi"]
+[ext_resource type="PackedScene" uid="uid://cravqnpdfawvx" path="res://enemy.tscn" id="2_pyjmi"]
 
 [node name="worldOver" type="Node2D"]
 script = ExtResource("1_uhihm")

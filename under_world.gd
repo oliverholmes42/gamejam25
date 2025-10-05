@@ -24,7 +24,7 @@ func _on_exit_area_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
 		label.visible = true
-		label.text = "Press (c) to reincarnate"
+		label.text = "Interact to reincarnate"
 
 
 func _on_exit_area_exited(body: Node) -> void:

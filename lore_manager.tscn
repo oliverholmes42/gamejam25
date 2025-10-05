@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://0kv5xdao0443"]
+
+[ext_resource type="Script" uid="uid://bk3f8x012oulw" path="res://lore_manager.gd" id="1_80dcq"]
+
+[node name="LoreManager" type="CanvasLayer"]
+script = ExtResource("1_80dcq")
+
+[node name="Display" type="RichTextLabel" parent="."]
+offset_left = 199.0
+offset_top = 71.0
+offset_right = 981.0
+offset_bottom = 204.0
+theme_override_constants/line_separation = 1
+
+[node name="ColorRect" type="ColorRect" parent="Display"]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -21.0
+offset_right = 843.0
+offset_bottom = 362.0
+color = Color(0, 0, 0, 0.19215687)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

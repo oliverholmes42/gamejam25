@@ -8,7 +8,8 @@ func save_player_data(player):
 		"max_health": player.max_health,
 		"speed": player.speed,
 		"attack": player.swordSwing.attack,
-		"score": player.score
+		"score": player.score,
+		"deaths": player.deaths
 	}
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
