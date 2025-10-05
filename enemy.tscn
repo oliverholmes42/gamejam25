@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [gd_scene load_steps=11 format=3 uid="uid://2oqfqxx5b61g"]
 
 [ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://enemy.gd" id="1_4gyqm"]
@@ -7,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dheu85r3ydwlb" path="res://soundEffects/fiendeSkada.mp3" id="3_qi2p4"]
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 [gd_scene load_steps=5 format=3 uid="uid://2oqfqxx5b61g"]
 
 [ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://enemy.gd" id="1_4gyqm"]
@@ -18,11 +21,15 @@
 [ext_resource type="Texture2D" uid="uid://butjt0ssud4t5" path="res://assets/10 Undead JRPG characters 1.0/RPG Maker x3 size/Pallete 3/Ghoul.png" id="1_7k104"]
 [ext_resource type="AudioStream" uid="uid://dhv1jl1cyy8k0" path="res://soundEffects/fiendeSkada-[AudioTrimmer.com]-[AudioTrimmer.com].mp3" id="3_qi2p4"]
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
 radius = 11.0
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iifgy"]
 shader = ExtResource("2_iifgy")
@@ -49,6 +56,8 @@ tracks/0/keys = {
 =======
 <<<<<<< Updated upstream
 =======
+>>>>>>> Stashed changes
+=======
 [sub_resource type="Animation" id="Animation_iifgy"]
 resource_name = "hit"
 length = 0.5
@@ -66,13 +75,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_epg4t"]
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+=======
+tracks/0/path = NodePath(".:modulate")
+>>>>>>> Stashed changes
 =======
 tracks/0/path = NodePath(".:modulate")
 >>>>>>> Stashed changes
@@ -82,6 +98,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 "values": [0.0]
 }
@@ -93,6 +110,8 @@ _data = {
 }
 
 =======
+=======
+>>>>>>> Stashed changes
 "values": [Color(1, 1, 1, 1)]
 }
 
@@ -103,6 +122,9 @@ _data = {
 }
 
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 [sub_resource type="CircleShape2D" id="CircleShape2D_qi2p4"]
 radius = 21.023796
@@ -122,6 +144,7 @@ scale = Vector2(0.14843751, 0.14062506)
 texture = ExtResource("1_7k104")
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [node name="FlashAni" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 &"": SubResource("AnimationLibrary_hb8ge")
@@ -130,12 +153,17 @@ libraries = {
 =======
 <<<<<<< Updated upstream
 =======
+>>>>>>> Stashed changes
+=======
 [node name="FlashAni" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 &"": SubResource("AnimationLibrary_3yqyl")
 }
 
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 [node name="DamageZone" type="Area2D" parent="."]
 
@@ -146,17 +174,23 @@ shape = SubResource("CircleShape2D_qi2p4")
 [node name="DamageTick" type="Timer" parent="."]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qi2p4")
 
 =======
 <<<<<<< Updated upstream
 =======
+>>>>>>> Stashed changes
+=======
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qi2p4")
 volume_db = 24.0
 
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 [connection signal="area_entered" from="DamageZone" to="." method="_on_damage_zone_area_entered"]
 [connection signal="area_exited" from="DamageZone" to="." method="_on_damage_zone_area_exited"]

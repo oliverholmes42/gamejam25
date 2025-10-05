@@ -10,6 +10,7 @@ var is_dying: bool = false  # stoppa AI/interaction efter lethal
 func take_damage(amount: int = 1) -> void:
 	health -= amount
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 	_play_flash_if_present()  # <-- LÄGG TILL DENNA RAD
 
@@ -25,6 +26,8 @@ func _play_flash_if_present() -> void:
 		ap.play("flash") # byt till rätt namn om din animation heter något annat
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 	print("%s took %d damage! Health now: %d" % [name, amount, health])
 	if health <= 0:
 		die()
@@ -61,6 +64,9 @@ func _play_flash_if_present() -> void:
 	if health <= 0:
 		die()
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 func die() -> void:
