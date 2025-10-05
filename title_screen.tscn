@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://btg117njqy6w6"]
+[gd_scene load_steps=5 format=3 uid="uid://btg117njqy6w6"]
 
 [ext_resource type="Script" uid="uid://pjynhihyhwqb" path="res://title_screen.gd" id="1_v6p8y"]
+[ext_resource type="Texture2D" uid="uid://blfwfesysliqg" path="res://assets/d99e07cb-99e2-4734-b30f-f8f0c5efd1fb.png" id="2_ak2if"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1s85s"]
 font_size = 50
@@ -14,6 +15,21 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_v6p8y")
+
+[node name="bakgrund" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -32.0
+offset_right = 1499.0
+offset_bottom = 952.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+texture = ExtResource("2_ak2if")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0

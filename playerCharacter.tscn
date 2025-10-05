@@ -1,9 +1,10 @@
-[gd_scene load_steps=53 format=3 uid="uid://b4v2swjxwc4p2"]
+[gd_scene load_steps=54 format=3 uid="uid://b4v2swjxwc4p2"]
 
 [ext_resource type="Script" uid="uid://bn5tsjm8w361a" path="res://player_character.gd" id="1_hpry5"]
 [ext_resource type="Texture2D" uid="uid://c7aj2cwju2u1p" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_u4713"]
 [ext_resource type="Script" uid="uid://bi0n0mobgmrqk" path="res://sword_swing.gd" id="3_ti2yg"]
 [ext_resource type="AudioStream" uid="uid://eil2gvyekaqu" path="res://soundEffects/sword-sound-260274-[AudioTrimmer.com] (2).mp3" id="4_3i25x"]
+[ext_resource type="AudioStream" uid="uid://dn5i3hknbah31" path="res://soundEffects/DörSound-[AudioTrimmer.com].mp3" id="5_713iq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hpry5"]
 radius = 7.9999995
@@ -398,6 +399,10 @@ stream = ExtResource("4_3i25x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_ti2yg")
+
+[node name="DeathSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_713iq")
+volume_db = 8.104
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed := 75
 var attacking := false
-var dead := false   # <--- NEW
+var dead := false
 
 @export var max_health := 50
 var health := max_health
@@ -15,13 +15,23 @@ signal died
 var score: int = 0
 signal applyPoints
 
+func _ready() -> void:
+	# Säker reset när spelaren (re)instansieras
+	dead = false
+	attacking = false
+	velocity = Vector2.ZERO
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.disabled = false
+	$AnimatedSprite2D.play("idle")
+	emit_signal("health_changed", float(health) / float(max_health) * 100.0)
+
 func add_points(amount: int):
 	print("points2: ", amount)
 	score += amount
 	emit_signal("applyPoints", score)
 	
 func spend_gold(amount: int) -> bool:
-	if amount > score:   # cost is higher than what you have
+	if amount > score:
 		return false
 	else:
 		score -= amount
@@ -35,7 +45,7 @@ func upgrade(thing, amount):
 		"speed":
 			speed += amount
 		"attack":
-			swordSwing.attack+= amount
+			swordSwing.attack += amount
 	
 
 func _physics_process(delta):
@@ -87,8 +97,12 @@ func _physics_process(delta):
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "death":
-		# After death animation, reset state
+		# RESET efter dödsanim – lås upp styrning igen
+		dead = false
 		attacking = false
+		velocity = Vector2.ZERO
+		if has_node("CollisionShape2D"):
+			$CollisionShape2D.disabled = false
 		$AnimatedSprite2D.play("idle")
 		return
 
@@ -99,10 +113,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		else:
 			$AnimatedSprite2D.play("idle")
 
-
-
 func _on_animated_sprite_2d_frame_changed() -> void:
-
 	var anim = $AnimatedSprite2D.animation
 	var frame = $AnimatedSprite2D.frame
 	
@@ -112,24 +123,44 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	if anim == "death" and frame == 11:
 		emit_signal("died")
 
-
 func apply_damage(amount):
 	if dead:
 		return
 	health -= amount
-	var percent = float(health) / float(max_health)
-	emit_signal("health_changed", percent * 100)
-	if health <= 0:
+	if health < 0:
 		health = 0
+	var percent = float(health) / float(max_health)
+	emit_signal("health_changed", percent * 100.0)
+	if health <= 0:
 		die()
 
-
 func die():
-	$AnimatedSprite2D.play("death")
-	velocity = Vector2.ZERO
+	dead = true
 	attacking = true
+	velocity = Vector2.ZERO
+
+	# Spela död-ljud (lägg en AudioStreamPlayer2D med namnet "DeathSfx" under spelaren och sätt Stream)
+	var ds: AudioStreamPlayer2D = get_node_or_null("DeathSfx") as AudioStreamPlayer2D
+	if ds and ds.stream:
+		ds.play(0.0)
+
+	# stäng av kollision så vi inte tar fler träffar under dödsanimering
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.disabled = true
+
+	$AnimatedSprite2D.play("death")
+
+func revive():
+	# Anropa denna om du vill respawna manuellt i din GameManager
+	dead = false
+	attacking = false
+	velocity = Vector2.ZERO
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.disabled = false
+	$AnimatedSprite2D.play("idle")
 
 func heal():
+	# Fullt liv + reset så du kan röra dig igen vid “börja om”
 	health = max_health
-	apply_damage(0)
-	
+	emit_signal("health_changed", 100.0)
+	revive()
