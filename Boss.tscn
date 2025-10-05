@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cravqnpdfawvx"]
+[gd_scene load_steps=11 format=3 uid="uid://xa2kt5clmxbo"]
 
-[ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://butjt0ssud4t5" path="res://assets/10 Undead JRPG characters 1.0/RPG Maker x3 size/Pallete 3/Ghoul.png" id="1_7k104"]
-[ext_resource type="AudioStream" uid="uid://cj1r6oho202ei" path="res://soundEffects/fiendeSkada-[AudioTrimmer.com]-[AudioTrimmer.com].mp3" id="3_qi2p4"]
+[ext_resource type="Script" uid="uid://c767kqehm52q6" path="res://enemy.gd" id="1_paxtu"]
+[ext_resource type="Texture2D" uid="uid://6kld1268qgqg" path="res://assets/10 Undead JRPG characters 1.0/RPG Maker x3 size/Pallete 1/Lich.png" id="2_paxtu"]
+[ext_resource type="AudioStream" uid="uid://dy1bu6rf1iqy3" path="res://soundEffects/monster-roars-177261-[AudioTrimmer.com].mp3" id="3_paxtu"]
+[ext_resource type="AudioStream" uid="uid://cpg74i8rx7mqp" path="res://soundEffects/deep-sea-monster-roar-329857.mp3" id="4_ohn0q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
-radius = 11.0
+radius = 32.06244
 
 [sub_resource type="Animation" id="Animation_4gyqm"]
 resource_name = "Flash"
@@ -62,22 +63,25 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qi2p4"]
-radius = 21.023796
+radius = 33.0
 
 [node name="Enemy" type="Area2D" groups=["enemy"]]
 collision_layer = 3
-script = ExtResource("1_4gyqm")
-speed = 50.0
+script = ExtResource("1_paxtu")
+speed = 100.0
 stop_distance = 15.0
+health = 500
+points = 5000
+knockback_pixels = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.7683716e-07, -4.7683716e-07)
-scale = Vector2(0.14843751, 0.14062506)
-texture = ExtResource("1_7k104")
+position = Vector2(9.536743e-07, -3.8146973e-06)
+scale = Vector2(0.30859378, 0.29427087)
+texture = ExtResource("2_paxtu")
 
 [node name="FlashAni" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -85,17 +89,20 @@ libraries = {
 }
 
 [node name="DamageZone" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
-position = Vector2(0, 3)
+position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_qi2p4")
 
 [node name="DamageTick" type="Timer" parent="."]
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_qi2p4")
-volume_db = 17.558
+stream = ExtResource("3_paxtu")
+volume_db = 2.701
+
+[node name="spawnRoar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ohn0q")
+volume_db = 6.753
 
 [connection signal="area_entered" from="DamageZone" to="." method="_on_damage_zone_area_entered"]
 [connection signal="area_exited" from="DamageZone" to="." method="_on_damage_zone_area_exited"]

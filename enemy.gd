@@ -1,7 +1,7 @@
 extends EnemyBase
 
-@export var speed: float = 80.0            # px/s
-@export var stop_distance: float = 20.0    # 0 = aldrig stanna; >0 = stanna nära spelaren
+@export var speed: float = 250.0            # px/s
+@export var stop_distance: float = 30.0    # 0 = aldrig stanna; >0 = stanna nära spelaren
 
 @onready var damage_zone: Area2D = $DamageZone
 @onready var damage_tick: Timer = $DamageTick
@@ -9,11 +9,14 @@ extends EnemyBase
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var flash_ani: AnimationPlayer = $Sprite2D/FlashAni
 
+@onready var spawnRoar: AudioStreamPlayer2D = $spawnRoar
+
 var player: Node2D
 var player_hitbox: Area2D = null
 
 func _ready() -> void:
-	# Hitta spelaren
+	if spawnRoar:
+		spawnRoar.play()
 	player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		push_error("[Enemy] No node in group 'player' found. Put your player in the 'player' group.")
@@ -55,7 +58,7 @@ func _on_damage_tick_timeout() -> void:
 	if player_hitbox and is_instance_valid(player_hitbox):
 		var p: Node = player_hitbox.get_parent()
 		if p.is_in_group("player") and p.has_method("apply_damage"):
-			p.apply_damage(3)  # justera skadan här
+			p.apply_damage(10)  # justera skadan här
 
 func _on_damage_zone_area_exited(area: Area2D) -> void:
 	if area == player_hitbox:

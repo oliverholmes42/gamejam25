@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk30poty3mpjy"]
+[gd_scene load_steps=6 format=3 uid="uid://bk30poty3mpjy"]
 
 [ext_resource type="Script" uid="uid://jd60bhfd14ld" path="res://main_land.gd" id="1_cjiq8"]
 [ext_resource type="PackedScene" uid="uid://bkqsrm7k7d8o2" path="res://Maps2.tscn" id="1_prs7q"]
-[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="2_ms04c"]
+[ext_resource type="PackedScene" uid="uid://cravqnpdfawvx" path="res://enemy.tscn" id="2_ms04c"]
 [ext_resource type="AudioStream" uid="uid://cu3uvc8m5juy6" path="res://music/walk-away-thrash-metal-instrumental-358603.mp3" id="4_7g3hu"]
+[ext_resource type="PackedScene" uid="uid://xa2kt5clmxbo" path="res://Boss.tscn" id="5_qoarn"]
 
 [node name="MainLand" type="Node2D"]
 script = ExtResource("1_cjiq8")
 enemy_scene = ExtResource("2_ms04c")
+BossScene = ExtResource("5_qoarn")
 
 [node name="OverWorld" parent="." instance=ExtResource("1_prs7q")]
 position = Vector2(-233, -46)
@@ -34,10 +36,14 @@ wait_time = 2.0
 autostart = true
 
 [node name="Spawn" type="Marker2D" parent="."]
-position = Vector2(110, 119)
+position = Vector2(1080, 864)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7g3hu")
+volume_db = -26.798
 autoplay = true
+
+[node name="BossSpawner" type="Marker2D" parent="."]
+position = Vector2(2024, 360)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

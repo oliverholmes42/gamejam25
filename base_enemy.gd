@@ -9,6 +9,7 @@ class_name EnemyBase
 @export var knockback_time: float = 0.12
 
 signal givePoints
+signal AddKill
 
 var is_dying: bool = false  # stoppa AI/interaction efter lethal
 
@@ -53,6 +54,7 @@ func die() -> void:
 
 	print("%s died2." % name)
 	emit_signal("givePoints", points)
+	emit_signal("AddKill")
 
 	# FRYS FIENDEN DIREKT (stoppa AI/rörelse & träffar)
 	set_process(false)
